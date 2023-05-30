@@ -18,7 +18,7 @@ function CompanyList() {
   /** filters based on a search term */
   async function filterCompanies(searchTerm){
     try {
-      const filteredCompanies = await JoblyApi.getCompany(searchTerm);
+      const filteredCompanies = await JoblyApi.searchCompanies(searchTerm);
       setCompanies(filteredCompanies)
     } catch (err) {
       setCompanies([])
@@ -28,8 +28,8 @@ function CompanyList() {
 
   return (
     <div>
-      <SearchForm searchFunc={() => filterCompanies}/>
-      {companies.length > 1
+      <SearchForm searchFunc={filterCompanies}/>
+      {companies.length >= 1
         ? companies.map(c => <CompanyCard key={c.handle} companyData={c}/>)
         : <div>Sorry, no results were found.</div>
       }

@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CompanyCard({ companyData }) {
 
   return (
     <div>
-      <h6>{companyData.name}</h6>
+      <Link to={`/companies/${companyData.handle}`}>
+        <h6>{companyData.name}</h6>
+      </Link>
       <p>{companyData.description}</p>
       {companyData.logoUrl &&
         <img src={companyData.logoUrl} alt={`Logo for ${companyData.name}`}/>

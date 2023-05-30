@@ -36,7 +36,15 @@ class JoblyApi {
     }
   }
 
+//////COMPANY REQUESTS
+
   // Individual API routes
+  /** Get list of companies based on searchTerm */
+  static async searchCompanies(searchTerm) {
+    let res = await this.request(`companies?nameLike=${searchTerm}`);
+    return res.companies;
+  }
+
 
   /** Get details on all companies */
   static async getCompanies() {
@@ -50,7 +58,8 @@ class JoblyApi {
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+
+//////JOB REQUESTS
 }
 
 export default JoblyApi
