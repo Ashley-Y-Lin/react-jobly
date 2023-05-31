@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/** Nav bar for Jobly app */
+
 function Nav() {
   return (
     <nav className="Nav">

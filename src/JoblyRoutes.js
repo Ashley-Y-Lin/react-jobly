@@ -5,6 +5,8 @@ import CompanyList from "./CompanyList";
 import JobList from "./JobList";
 import CompanyDetail from "./CompanyDetail";
 
+/** Routes for Jobly app */
+
 function JoblyRoutes() {
   return (
     <Routes className="Routes">

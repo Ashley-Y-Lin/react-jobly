@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuid } from 'uuid';
 
 /** Form for getting a search term.
  *
@@ -9,7 +8,7 @@ import { v4 as uuid } from 'uuid';
  * State:
  * formData: { searchTerm }
  *
- * CompanyList -> SearchForm
+ * CompanyList || JobList -> SearchForm
  */
 
 function SearchForm({ searchFunc }) {

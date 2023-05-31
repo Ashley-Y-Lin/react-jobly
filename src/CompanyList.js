@@ -3,6 +3,15 @@ import JoblyApi from "./api"
 import SearchForm from "./SearchForm"
 import CompanyCard from "./CompanyCard"
 
+/** CompanyList renders the page for /companies
+ *
+ * State
+ * - companies: array of company objects like
+ * [{name, handle, description, jobs}...]
+ *
+ * JoblyRoutes => CompanyList => SearchForm & CompanyCard
+ */
+
 function CompanyList() {
   const [companies, setCompanies] = useState([]);
 

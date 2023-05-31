@@ -60,6 +60,18 @@ class JoblyApi {
 
 
 //////JOB REQUESTS
+  /** Get details on all jobs */
+  static async getJobs() {
+    let res = await this.request(`jobs/`);
+    return res.jobs;
+  }
+
+  /** Get list of jobs based on searchTerm */
+  static async searchJobs(searchTerm) {
+    let res = await this.request(`jobs?title=${searchTerm}`);
+    return res.jobs;
+  }
+
 }
 
 export default JoblyApi

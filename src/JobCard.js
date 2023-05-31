@@ -1,6 +1,14 @@
 import React from "react";
 
-function JobCard({job}) {
+/** JobCard displays information for a single job.
+ *
+ * Props
+ * - job: {title, salary, equity, id}
+ *
+ * JobCardList => JobCard
+ */
+
+function JobCard({ job }) {
   return (
     <div>
       <h3>{job.title}</h3>
@@ -10,4 +18,4 @@ function JobCard({job}) {
   );
 }
 
-export default JobCard
+export default JobCard;

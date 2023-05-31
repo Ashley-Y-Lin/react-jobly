@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/** CompanyCard displays a single company.
+ *
+ * Props:
+ * - companyData: {handle, name, description, logoUrl}
+ *
+ * JoblyRoutes => CompanyList => CompanyCard
+ */
+
 function CompanyCard({ companyData }) {
 
   return (
