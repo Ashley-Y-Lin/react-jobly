@@ -18,7 +18,7 @@ class JoblyApi {
   //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
   //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
-  static token="";
+  static token = "";
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -26,8 +26,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -38,13 +38,13 @@ class JoblyApi {
     }
   }
 
-//////COMPANY REQUESTS
+  //////COMPANY REQUESTS
 
   // Individual API routes
 
   /** Get details on all companies */
-  static async getCompanies(searchTerm={}) {
-    let res = await this.request(`companies`,searchTerm);
+  static async getCompanies(searchTerm = {}) {
+    let res = await this.request(`companies`, searchTerm);
     return res.companies;
   }
 
@@ -54,30 +54,36 @@ class JoblyApi {
     return res.company;
   }
 
-//////JOB REQUESTS
+  //////JOB REQUESTS
   /** Get details on all jobs */
-  static async getJobs(searchTerm={}) {
+  static async getJobs(searchTerm = {}) {
     let res = await this.request(`jobs`, searchTerm);
     return res.jobs;
   }
 
-///// USER REQUESTS
+  ///// USER REQUESTS
 
   /** Registers a new user and returns JWT token. */
-  static async registerUser(formData={}) {
+  static async registerUser(formData = {}) {
     let res = await this.request(`auth/register`, formData, "post");
     return res.token;
+  }
+
+  /** Get user detail for a specific user by username */
+  static async getUserDetail(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 
   /** Login a user and returns JWT token.
    *
    * Takes as input formData, which looks like {username, password}
    */
-  static async loginUser(formData={}) {
+  static async loginUser(formData = {}) {
     let res = await this.request(`auth/token`, formData, "post");
     return res.token;
   }
 
 }
 
-export default JoblyApi
+export default JoblyApi;

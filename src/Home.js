@@ -1,12 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "./userContext";
 
 
 function Home() {
-  const { token, currUser } = useContext(userContext);
+  console.log("home is running");
 
-  if (token === "" || currUser === "") {
+  const { token, currUser } = useContext(userContext);
+  console.log("token", token);
+  console.log("currUser", currUser);
+
+  if (token === "" || currUser.username === "") {
     return (
       <div>
         <button >
@@ -16,11 +20,11 @@ function Home() {
           <Link to="/signup">Signup</Link>
         </button>
       </div>
-    )
+    );
   }
-  return(
-    <h1> Welcome back {currUser}! </h1>
-  )
+  return (
+    <h1> Welcome back {currUser.firstName}! </h1>
+  );
 }
 
 export default Home;
