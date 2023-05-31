@@ -9,10 +9,12 @@ import JobCard from "./JobCard";
  * JobCard || CompanyDetail => JobCardList => JobCard
  */
 
+// TODO: add top level classNames for top level things in each component,
+// so it makes styling easier
 function JobCardList({jobs=[]}) {
   return(
     <div>
-      {jobs.length >= 1
+      {jobs.length
         ? jobs.map(job => <JobCard key={job.id} job={job}/>)
         : <div>Sorry, no jobs were found.</div>
       }

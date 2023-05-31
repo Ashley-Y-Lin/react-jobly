@@ -39,12 +39,13 @@ class JoblyApi {
 //////COMPANY REQUESTS
 
   // Individual API routes
+
+  //TODO: pass in nameLike as key in {} into data param
   /** Get list of companies based on searchTerm */
   static async searchCompanies(searchTerm) {
     let res = await this.request(`companies?nameLike=${searchTerm}`);
     return res.companies;
   }
-
 
   /** Get details on all companies */
   static async getCompanies() {
@@ -58,7 +59,6 @@ class JoblyApi {
     return res.company;
   }
 
-
 //////JOB REQUESTS
   /** Get details on all jobs */
   static async getJobs() {
@@ -66,6 +66,7 @@ class JoblyApi {
     return res.jobs;
   }
 
+  // TODO: pass in as data param
   /** Get list of jobs based on searchTerm */
   static async searchJobs(searchTerm) {
     let res = await this.request(`jobs?title=${searchTerm}`);

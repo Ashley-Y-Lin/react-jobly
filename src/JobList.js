@@ -3,6 +3,7 @@ import JoblyApi from "./api"
 import SearchForm from "./SearchForm"
 import JobCardList from "./JobCardList"
 
+// TODO: add what happens after mount etc
 /** JobList renders the page for /jobs
  *
  * State
@@ -23,6 +24,7 @@ function JobList() {
     getJobs();
   }, []);
 
+  // TODO: use diff api function
   /** filters based on a search term */
   async function filterJobs(searchTerm){
     try {
@@ -33,6 +35,8 @@ function JobList() {
       console.log(err.message)
     }
   }
+
+  // TODO: add is loading thing
 
   return (
     <div>

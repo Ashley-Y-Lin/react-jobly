@@ -13,25 +13,31 @@ import { useParams } from "react-router-dom";
 */
 
 function CompanyDetail() {
+  //TODO: could destructure name out of params
   const params = useParams();
   const [company, setCompany] = useState({});
 
   /** gets list of jobs pertaining to specific company */
   useEffect(function getCompanyJobsList() {
+    // TODO: use a try catch, catch the errors that are in [], have state that
+    // does something with the errors (check what they are and display nice
+    // message for the user)
     async function getCompanyJobs() {
       const companyResponse = await JoblyApi.getCompany(params.name);
-      setCompany(companyResponse)
+      setCompany(companyResponse);
     }
     getCompanyJobs();
   }, []);
 
-  return(
+  // TODO: add the isLoading thing
+
+  return (
     <div>
       <h1>{company.name}</h1>
       <p>{company.description}</p>
-      <JobCardList jobs={company.jobs}/>
+      <JobCardList jobs={company.jobs} />
     </div>
-  )
+  );
 }
 
 export default CompanyDetail;

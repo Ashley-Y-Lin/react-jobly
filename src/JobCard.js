@@ -9,6 +9,8 @@ import React from "react";
  */
 
 function JobCard({ job }) {
+
+  // TODO: add logic to make job.salary look nicer
   return (
     <div>
       <h3>{job.title}</h3>

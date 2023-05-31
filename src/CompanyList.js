@@ -3,6 +3,7 @@ import JoblyApi from "./api"
 import SearchForm from "./SearchForm"
 import CompanyCard from "./CompanyCard"
 
+//TODO: add stuff about what happens on mount, when search form submitted, etc.
 /** CompanyList renders the page for /companies
  *
  * State
@@ -24,6 +25,8 @@ function CompanyList() {
     getCompanies();
   }, []);
 
+  // TODO: use the other func from api, somehow condense code bc you're making
+  // similar request above
   /** filters based on a search term */
   async function filterCompanies(searchTerm){
     try {
@@ -35,10 +38,12 @@ function CompanyList() {
     }
   }
 
+  //TODO: add the is loading thing
+
   return (
     <div>
       <SearchForm searchFunc={filterCompanies}/>
-      {companies.length >= 1
+      {companies.length
         ? companies.map(c => <CompanyCard key={c.handle} companyData={c}/>)
         : <div>Sorry, no results were found.</div>
       }
