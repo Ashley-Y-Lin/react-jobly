@@ -1,4 +1,5 @@
 import React from "react";
+import convertAndFormat from "./utils";
 
 /** JobCard displays information for a single job.
  *
@@ -10,11 +11,10 @@ import React from "react";
 
 function JobCard({ job }) {
 
-  // TODO: add logic to make job.salary look nicer
   return (
-    <div>
+    <div className="JobCard">
       <h3>{job.title}</h3>
-      {job.salary && <p>salary: {job.salary}</p>}
+      {job.salary && <p>salary: ${convertAndFormat(job.salary)}</p>}
       <p>equity: {job.equity}</p>
     </div>
   );

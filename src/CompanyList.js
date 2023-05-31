@@ -3,8 +3,11 @@ import JoblyApi from "./api"
 import SearchForm from "./SearchForm"
 import CompanyCard from "./CompanyCard"
 
-//TODO: add stuff about what happens on mount, when search form submitted, etc.
 /** CompanyList renders the page for /companies
+ *
+ * on Mount
+ * - gets all companies via API request and sets state (companies) to
+ * array of all company objects
  *
  * State
  * - companies: array of company objects like
@@ -14,37 +17,31 @@ import CompanyCard from "./CompanyCard"
  */
 
 function CompanyList() {
-  const [companies, setCompanies] = useState([]);
+  const [companies, setCompanies] = useState({data:[], isLoading:true});
 
   /** gets all companies only AFTER MOUNT */
   useEffect(function getAllCompanies() {
-    async function getCompanies() {
-      const companiesResponse = await JoblyApi.getCompanies();
-      setCompanies(companiesResponse);
-    }
     getCompanies();
   }, []);
 
-  // TODO: use the other func from api, somehow condense code bc you're making
-  // similar request above
   /** filters based on a search term */
-  async function filterCompanies(searchTerm){
+  async function getCompanies(searchTerm={}){
     try {
-      const filteredCompanies = await JoblyApi.searchCompanies(searchTerm);
-      setCompanies(filteredCompanies)
+      const companiesResponse = await JoblyApi.getCompanies(searchTerm);
+      setCompanies({data:companiesResponse, isLoading:false});
     } catch (err) {
-      setCompanies([])
-      console.log(err.message)
+      setCompanies({data:[], isLoading:false});
+      console.log(err.message);
     }
   }
 
-  //TODO: add the is loading thing
+  if (companies.isLoading) return (<h1>Loading...</h1>)
 
   return (
-    <div>
-      <SearchForm searchFunc={filterCompanies}/>
-      {companies.length
-        ? companies.map(c => <CompanyCard key={c.handle} companyData={c}/>)
+    <div className="CompanyList">
+      <SearchForm searchFunc={getCompanies} topic="company"/>
+      {companies.data.length
+        ? companies.data.map(c => <CompanyCard key={c.handle} companyData={c}/>)
         : <div>Sorry, no results were found.</div>
       }
     </div>

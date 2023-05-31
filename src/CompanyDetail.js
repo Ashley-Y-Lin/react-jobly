@@ -13,29 +13,31 @@ import { useParams } from "react-router-dom";
 */
 
 function CompanyDetail() {
-  //TODO: could destructure name out of params
-  const params = useParams();
-  const [company, setCompany] = useState({});
+  const { name } = useParams();
+  const [company, setCompany] = useState({data:null, isLoading:true});
 
   /** gets list of jobs pertaining to specific company */
   useEffect(function getCompanyJobsList() {
-    // TODO: use a try catch, catch the errors that are in [], have state that
-    // does something with the errors (check what they are and display nice
-    // message for the user)
-    async function getCompanyJobs() {
-      const companyResponse = await JoblyApi.getCompany(params.name);
-      setCompany(companyResponse);
-    }
-    getCompanyJobs();
+      async function getCompanyJobs() {
+        try{
+          const companyResponse = await JoblyApi.getCompany(name);
+          setCompany({data:companyResponse, isLoading:false});
+        } catch (err) {
+          setCompany({data:null, isLoading:false});
+          console.log(err.message);
+        }
+      }
+      getCompanyJobs();
+
   }, []);
 
-  // TODO: add the isLoading thing
+  if (company.isLoading) return (<h1>Loading...</h1>)
 
   return (
-    <div>
-      <h1>{company.name}</h1>
-      <p>{company.description}</p>
-      <JobCardList jobs={company.jobs} />
+    <div className="CompanyDetail">
+      <h1>{company.data.name}</h1>
+      <p>{company.data.description}</p>
+      <JobCardList jobs={company.data.jobs} />
     </div>
   );
 }

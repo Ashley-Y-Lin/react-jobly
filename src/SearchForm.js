@@ -11,8 +11,7 @@ import React, { useState } from "react";
  * CompanyList || JobList -> SearchForm
  */
 
-function SearchForm({ searchFunc }) {
-  // TODO: could make state searchTerm directly
+function SearchForm({ searchFunc, topic }) {
   const [formData, setFormData] = useState({
     searchTerm: "",
   });
@@ -29,7 +28,8 @@ function SearchForm({ searchFunc }) {
   /** Submit form: call function from parent & clear inputs. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await searchFunc(formData.searchTerm);
+    const queryParam = topic==="company" ? "nameLike" : "title";
+    await searchFunc({[queryParam]: formData.searchTerm});
     setFormData({ searchTerm: "" });
   }
 

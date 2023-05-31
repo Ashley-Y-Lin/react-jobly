@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function CompanyCard({ companyData }) {
 
   return (
-    <div>
+    <div className="CompanyCard">
       <Link to={`/companies/${companyData.handle}`}>
         <h6>{companyData.name}</h6>
       </Link>
