@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import JoblyApi from "./api"
 import SearchForm from "./SearchForm"
 import CompanyCard from "./CompanyCard"
+import userContext from "./userContext";
 
 /** CompanyList renders the page for /companies
  *
@@ -17,6 +18,7 @@ import CompanyCard from "./CompanyCard"
  */
 
 function CompanyList() {
+  const {currUser } = useContext(userContext);
   const [companies, setCompanies] = useState({data:[], isLoading:true});
 
   /** gets all companies only AFTER MOUNT */
@@ -36,7 +38,7 @@ function CompanyList() {
   }
 
   if (companies.isLoading) return (<h1>Loading...</h1>)
-
+  console.log("companyList rendered");
   return (
     <div className="CompanyList">
       <SearchForm searchFunc={getCompanies} topic="company"/>

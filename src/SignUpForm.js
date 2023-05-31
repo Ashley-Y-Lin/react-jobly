@@ -35,7 +35,7 @@ function SignUpForm({ onSubmit }) {
         lastName: "",
         email: ""
       });
-      // navigate("/");
+      navigate("/");
     } catch (err) {
       setAlertMsgs(err);
     }
@@ -99,7 +99,7 @@ function SignUpForm({ onSubmit }) {
           />
         </div>
         {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs}/>}
-        <button className="SignUpForm-submitBtn btn btn-primary m-1">Sign up</button>
+      <button className="SignUpForm-submitBtn btn btn-primary m-1">Sign up</button>
       </form>
     </div>
   );

@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import userContext from "./userContext";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import { useNavigate } from "react-router-dom";
+
 
 /** Nav bar for Jobly app
  *
@@ -11,6 +13,12 @@ import "./Nav.css";
 
 function Nav({ logout }) {
   const { token, currUser } = useContext(userContext);
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
 
   if (token === "" || currUser.username === "") {
     return (
@@ -30,7 +38,7 @@ function Nav({ logout }) {
           <Link to="/companies">Companies</Link>
           <Link to="/jobs">Jobs</Link>
           <Link to="/profile">Profile</Link>
-          <Link onClick={logout}>Logout {currUser.firstName}</Link>
+          <Link onClick={handleLogout}>Logout {currUser.firstName}</Link>
         </div>
       </nav>
     );
