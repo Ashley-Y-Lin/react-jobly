@@ -1,4 +1,5 @@
 import React from "react";
+import ProfileForm from "./ProfileForm";
 
 /** Profile renders the page for /profile
  */
