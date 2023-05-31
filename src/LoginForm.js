@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 function LoginForm ({onSubmit}) {
   const navigate = useNavigate();
@@ -7,6 +8,7 @@ function LoginForm ({onSubmit}) {
     username:"",
     password:""
   });
+  const [alertMsgs, setAlertMsgs] = useState([]);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -20,12 +22,17 @@ function LoginForm ({onSubmit}) {
   /** Submit form: call function from parent & clear inputs. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await onSubmit(formData);
-    setFormData({
-      username:"",
-      password:""
-    });
-    navigate("/");
+    try {
+      await onSubmit(formData);
+      setFormData({
+        username:"",
+        password:""
+      });
+      navigate("/");
+    } catch (err) {
+      setAlertMsgs(err);
+    }
+
   }
 
   return (
@@ -52,7 +59,7 @@ function LoginForm ({onSubmit}) {
                 placeholder="password"
             />
           </div>
-
+          {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs}/>}
           <button className="LoginForm-submitBtn">Login</button>
         </form>
       </div>

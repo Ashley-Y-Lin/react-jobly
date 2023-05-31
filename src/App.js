@@ -13,19 +13,15 @@ import Nav from "./Nav";
 */
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(JoblyApi.token);
   const [currUser, setCurrUser] = useState("");
 
   async function login(formData={}) {
-    try {
-      const loginResp = await JoblyApi.loginUser(formData);
-      setToken(loginResp);
-      setCurrUser(formData.username);
-    } catch (err) {
-      setToken("");
-      setCurrUser("");
-      console.log(err.message);
-    }
+    const loginResp = await JoblyApi.loginUser(formData);
+    setToken(loginResp);
+    JoblyApi.token = loginResp;
+    setCurrUser(formData.username);
+
   }
 
   async function signup(formData = {}) {
