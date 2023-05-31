@@ -10,7 +10,7 @@ import LoginForm from "./LoginForm";
 function Login({login}) {
 
   return (
-    <div className="Login">
+    <div className="Login m-2">
       <h2>Login</h2>
       <LoginForm onSubmit={login}/>
     </div>

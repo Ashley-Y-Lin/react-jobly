@@ -5,9 +5,9 @@ import SignUpForm from "./SignUpForm";
  */
 
 function SignUp({signup}) {
-
+  console.log("rendering SignUp")
   return (
-    <div className="SignUp">
+    <div className="SignUp m-2">
       <h2>Sign up</h2>
       <SignUpForm onSubmit={signup}/>
     </div>

@@ -37,10 +37,10 @@ function LoginForm ({onSubmit}) {
 
   return (
       <div className="LoginForm">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username"></label>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="form-group">
             <input
+                className="form-control w-25"
                 id="username"
                 onChange={handleChange}
                 name="username"
@@ -49,9 +49,9 @@ function LoginForm ({onSubmit}) {
             />
           </div>
 
-          <div>
-            <label htmlFor="password"></label>
+          <div className="form-group">
             <input
+                className="form-control w-25"
                 id="password"
                 onChange={handleChange}
                 name="password"
@@ -60,7 +60,7 @@ function LoginForm ({onSubmit}) {
             />
           </div>
           {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs}/>}
-          <button className="LoginForm-submitBtn">Login</button>
+          <button className="LoginForm-submitBtn btn btn-primary m-1">Login</button>
         </form>
       </div>
   );

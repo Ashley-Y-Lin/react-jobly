@@ -26,6 +26,7 @@ function SignUpForm({ onSubmit }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
+      console.log("trying handleSubmit");
       await onSubmit(formData);
       setFormData({
         username: "",
@@ -34,18 +35,18 @@ function SignUpForm({ onSubmit }) {
         lastName: "",
         email: ""
       });
-      navigate("/");
+      // navigate("/");
     } catch (err) {
       setAlertMsgs(err);
     }
   }
 
   return (
-    <div className="SignUpForm">
+    <div className="SignUpForm m-2">
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username"></label>
           <input
+            className="form-control w-25"
             id="username"
             onChange={handleChange}
             name="username"
@@ -55,8 +56,8 @@ function SignUpForm({ onSubmit }) {
         </div>
 
         <div>
-          <label htmlFor="password"></label>
           <input
+            className="form-control w-25"
             id="password"
             onChange={handleChange}
             name="password"
@@ -66,8 +67,8 @@ function SignUpForm({ onSubmit }) {
         </div>
 
         <div>
-          <label htmlFor="firstName"></label>
           <input
+            className="form-control w-25"
             id="firstName"
             onChange={handleChange}
             name="firstName"
@@ -77,8 +78,8 @@ function SignUpForm({ onSubmit }) {
         </div>
 
         <div>
-          <label htmlFor="lastName"></label>
           <input
+            className="form-control w-25"
             id="lastName"
             onChange={handleChange}
             name="lastName"
@@ -88,8 +89,8 @@ function SignUpForm({ onSubmit }) {
         </div>
 
         <div>
-          <label htmlFor="email"></label>
           <input
+            className="form-control w-25"
             id="email"
             onChange={handleChange}
             name="email"
@@ -98,7 +99,7 @@ function SignUpForm({ onSubmit }) {
           />
         </div>
         {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs}/>}
-        <button className="SignUpForm-submitBtn">Sign up</button>
+        <button className="SignUpForm-submitBtn btn btn-primary m-1">Sign up</button>
       </form>
     </div>
   );

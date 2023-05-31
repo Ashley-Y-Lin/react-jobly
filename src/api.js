@@ -66,6 +66,7 @@ class JoblyApi {
   /** Registers a new user and returns JWT token. */
   static async registerUser(formData = {}) {
     let res = await this.request(`auth/register`, formData, "post");
+    console.log("registered token:", res.token);
     return res.token;
   }
 

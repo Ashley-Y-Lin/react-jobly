@@ -12,11 +12,11 @@ function Home() {
 
   if (token === "" || currUser.username === "") {
     return (
-      <div>
-        <button >
+      <div className="position-absolute top-50 start-50 translate-middle">
+        <button className="btn btn-success m-2">
           <Link to="/login">Login</Link>
         </button>
-        <button>
+        <button className="btn btn-info m-2 ">
           <Link to="/signup">Signup</Link>
         </button>
       </div>

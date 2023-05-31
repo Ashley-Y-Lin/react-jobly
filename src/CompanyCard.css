@@ -1,0 +1,20 @@
+.CompanyCard h6 {
+    color: navy;
+    margin-left: 5px;
+    margin-bottom: -3px;
+}
+
+.CompanyCard {
+    border: 3px solid black;
+    margin: 15px;
+    padding: 3px;
+    position: relative;
+}
+
+.CompanyCard img {
+    max-width: 80px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+
+}

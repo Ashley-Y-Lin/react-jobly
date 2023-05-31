@@ -15,39 +15,38 @@ import Nav from "./Nav";
 function App() {
   const [token, setToken] = useState(JoblyApi.token);
   const [currUser, setCurrUser] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+    username:"",
+    password:"",
+    firstName:"",
+    lastName:"",
+    email:""
   });
 
   /** updates currUser every time the token changes  */
-  useEffect(function updateCurrUserInfo() {
-    console.log("useEffect is running")
-    async function updateNewCurrUser() {
-      if (currUser.username === "") {
-        console.log("on mount")
-        return;
-      }
-      console.log("after moutn runs")
-      const newCurrUser = await JoblyApi.getUserDetail(currUser.username);
-      console.log("newCurrUser", newCurrUser)
-      setCurrUser(newCurrUser)
-    }
-    updateNewCurrUser();
-  }, [token]);
+   useEffect(function updateCurrUserInfo() {
+     console.log("useEffect is running")
+     async function updateNewCurrUser() {
+       if (currUser.username === "") {
+         return;
+       }
+       const newCurrUser = await JoblyApi.getUserDetail(currUser.username);
+       setCurrUser(() => ({...newCurrUser}));
+     }
+     updateNewCurrUser();
+   }, [token]);
 
   async function login(formData = {}) {
     const loginResp = await JoblyApi.loginUser(formData);
-    setCurrUser({ ...currUser, username: formData.username });
+    setCurrUser({...currUser, username:formData.username});
     setToken(loginResp);
     JoblyApi.token = loginResp;
+    //currUser {username:'populated', .... ''}
   }
 
   async function signup(formData = {}) {
+    console.log("signup formData: ", formData);
     const registerResp = await JoblyApi.registerUser(formData);
-    setCurrUser({ ...currUser, username: formData.username });
+    setCurrUser({...currUser, username:formData.username});
     setToken(registerResp);
     JoblyApi.token = registerResp;
   }
@@ -56,11 +55,11 @@ function App() {
     setToken("");
     JoblyApi.token = "";
     setCurrUser({
-      username: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: ""
+      username:"",
+      password:"",
+      firstName:"",
+      lastName:"",
+      email:""
     });
   }
 

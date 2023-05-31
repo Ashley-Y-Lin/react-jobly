@@ -37,8 +37,8 @@ function SearchForm({ searchFunc, topic }) {
       <div className="SearchForm">
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="searchTerm"></label>
             <input
+                className="form-control w-25 m-2"
                 id="searchTerm"
                 onChange={handleChange}
                 name="searchTerm"
@@ -46,7 +46,7 @@ function SearchForm({ searchFunc, topic }) {
                 placeholder="Enter a search value!"
             />
           </div>
-          <button className="SearchForm-submitBtn">Submit</button>
+          <button className="SearchForm-submitBtn btn btn-primary m-2">Submit</button>
         </form>
       </div>
   );

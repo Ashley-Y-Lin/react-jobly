@@ -1,5 +1,6 @@
 import React from "react";
 import convertAndFormat from "./utils";
+import "./JobCard.css";
 
 /** JobCard displays information for a single job.
  *
@@ -14,8 +15,10 @@ function JobCard({ job }) {
   return (
     <div className="JobCard">
       <h3>{job.title}</h3>
-      {job.salary && <p>salary: ${convertAndFormat(job.salary)}</p>}
-      <p>equity: {job.equity}</p>
+      <p>
+      {job.salary && `salary: ${convertAndFormat(job.salary)}`} <br />
+      equity: {job.equity}
+      </p>
     </div>
   );
 }
