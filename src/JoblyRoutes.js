@@ -12,33 +12,35 @@ import Profile from "./Profile";
 /** Routes for Jobly app
  *
  * Props
+ * - updateToken: func that resets JoblyApi.token based on localStorage
  * - login: func from parent, passed down to Login
  * - signup: func from parent, passed down to Signup
 */
 
-function JoblyRoutes({login, signup}) {
-  const { token, currUser } = useContext(userContext);
-
-    if (token === "" || currUser.username === "") {
-      return (
+function JoblyRoutes({ updateToken, login, signup }) {
+  const { currUser } = useContext(userContext);
+  // updateToken()
+  if (!currUser) {
+    return (
       <Routes className="Routes">
-          <Route element={<Home />} path="/" />
-          <Route element={<Login login={login}/>} path="/login" />
-          <Route element={<SignUp signup={signup}/>} path="/signup" />
+        <Route element={<Home />} path="/" />
+        <Route element={<Login login={login} />} path="/login" />
+        <Route element={<SignUp signup={signup} />} path="/signup" />
+        <Route element={<Navigate to="/" />} path="*" />
       </Routes>
-      )
-    } else {
-      return (
+    );
+  } else {
+    return (
       <Routes className="Routes">
-          <Route element={<Home />} path="/" />
-          <Route element={<CompanyList />} path="/companies" />
-          <Route element={<JobList />} path="/jobs" />
-          <Route element={<CompanyDetail />} path="/companies/:name" />
-          <Route element={<Profile />} path="/profile" />
-          <Route element={<Navigate to="/" />} path="*" />
+        <Route element={<Home />} path="/" />
+        <Route element={<CompanyList />} path="/companies" />
+        <Route element={<JobList />} path="/jobs" />
+        <Route element={<CompanyDetail />} path="/companies/:name" />
+        <Route element={<Profile />} path="/profile" />
+        <Route element={<Navigate to="/" />} path="*" />
       </Routes>
-      )
-    };
+    );
+  };
 }
 
 export default JoblyRoutes;

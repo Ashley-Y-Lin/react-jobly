@@ -4,13 +4,15 @@ import Alert from "./Alert";
 
 function SignUpForm({ onSubmit }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const initialFormInput = {
     username: "",
     password: "",
     firstName: "",
     lastName: "",
     email: ""
-  });
+  }
+
+  const [formData, setFormData] = useState(initialFormInput);
   const [alertMsgs, setAlertMsgs] = useState([]);
 
   /** Update form input. */
@@ -28,13 +30,7 @@ function SignUpForm({ onSubmit }) {
     try {
       console.log("trying handleSubmit");
       await onSubmit(formData);
-      setFormData({
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        email: ""
-      });
+      setFormData(initialFormInput);
       navigate("/");
     } catch (err) {
       setAlertMsgs(err);
@@ -98,8 +94,8 @@ function SignUpForm({ onSubmit }) {
             placeholder="email"
           />
         </div>
-        {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs}/>}
-      <button className="SignUpForm-submitBtn btn btn-primary m-1">Sign up</button>
+        {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs} />}
+        <button className="SignUpForm-submitBtn btn btn-primary m-1">Sign up</button>
       </form>
     </div>
   );

@@ -6,11 +6,9 @@ import userContext from "./userContext";
 function Home() {
   console.log("home is running");
 
-  const { token, currUser } = useContext(userContext);
-  console.log("token", token);
-  console.log("currUser", currUser);
+  const { currUser } = useContext(userContext);
 
-  if (token === "" || currUser.username === "") {
+  if (!currUser) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
         <button className="btn btn-success m-2">
