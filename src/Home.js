@@ -20,7 +20,7 @@ function Home() {
     );
   }
   return (
-    <h1> Welcome back {currUser.firstName}! </h1>
+    <h1 className="text-center p-5"> Welcome back {currUser.firstName}! </h1>
   );
 }
 
