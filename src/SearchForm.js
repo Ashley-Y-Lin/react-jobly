@@ -36,7 +36,7 @@ function SearchForm({ searchFunc, topic }) {
   return (
       <div className="SearchForm">
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="d-flex flex-row">
             <input
                 className="form-control w-25 m-2"
                 id="searchTerm"
@@ -45,8 +45,8 @@ function SearchForm({ searchFunc, topic }) {
                 value={formData.searchTerm}
                 placeholder="Enter a search value!"
             />
-          </div>
           <button className="SearchForm-submitBtn btn btn-primary m-2">Submit</button>
+          </div>
         </form>
       </div>
   );

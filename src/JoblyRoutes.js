@@ -8,6 +8,7 @@ import CompanyDetail from "./CompanyDetail";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Profile from "./Profile";
+import NotFound from "./NotFound";
 
 /** Routes for Jobly app
  *
@@ -23,7 +24,7 @@ function JoblyRoutes({ login, signup, update }) {
   return (
     <Routes className="Routes">
       <Route path="/" element={<Home />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<NotFound />} />
       {!currUser
         ? <React.Fragment>
           <Route path="/login" element={<Login login={login} />} />

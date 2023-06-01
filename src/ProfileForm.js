@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import userContext from "./userContext";
+import Alert from "./Alert";
 
 /** ProfileForm renders the edit profile form.
  *
@@ -12,6 +13,8 @@ import userContext from "./userContext";
 
 function ProfileForm({ onSubmit }) {
   const { currUser } = useContext(userContext);
+  const [alertMsgs, setAlertMsgs] = useState([]);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState(currUser);
@@ -28,11 +31,15 @@ function ProfileForm({ onSubmit }) {
   /** Submit form: call function from parent & clear inputs. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    await onSubmit(formData);
-    setFormData(currUser);
-    navigate("/");
+    try {
+      await onSubmit(formData);
+      setFormData(currUser);
+      navigate("/");
+    } catch(err) {
+      setAlertMsgs(err);
+    }
   }
-
+//TODO: alert for successful update
   return (
     <div className="ProfileForm">
       <form onSubmit={handleSubmit}>
@@ -57,7 +64,7 @@ function ProfileForm({ onSubmit }) {
             onChange={handleChange}
             name="firstName"
             value={formData.firstName}
-            placeholder="firstName"
+            placeholder="first name"
           />
         </div>
 
@@ -69,7 +76,7 @@ function ProfileForm({ onSubmit }) {
             onChange={handleChange}
             name="lastName"
             value={formData.lastName}
-            placeholder="lastName"
+            placeholder="last name"
           />
         </div>
 
@@ -84,7 +91,7 @@ function ProfileForm({ onSubmit }) {
             placeholder="email"
           />
         </div>
-
+        {alertMsgs.length > 0 && <Alert alertMsgs={alertMsgs} />}
         <button className="ProfileForm-submitBtn btn btn-primary m-1">Save Changes</button>
       </form>
     </div>

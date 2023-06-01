@@ -10,10 +10,11 @@ function Home() {
   if (!currUser) {
     return (
       <div className="position-absolute top-50 start-50 translate-middle">
-        <button className="btn btn-success m-2">
+        <h4>Welcome to Jobly!</h4>
+        <button className="btn btn-success m-2 text-center">
           <Link to="/login">Login</Link>
         </button>
-        <button className="btn btn-info m-2 ">
+        <button className="btn btn-info m-2 text-center">
           <Link to="/signup">Signup</Link>
         </button>
       </div>

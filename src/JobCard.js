@@ -14,7 +14,7 @@ function JobCard({ job }) {
 
   return (
     <div className="JobCard">
-      <h3>{job.title}</h3>
+      <h4 className="text-primary">{job.title}</h4>
       <p>
       {job.salary && `salary: ${convertAndFormat(job.salary)}`} <br />
       equity: {job.equity}
