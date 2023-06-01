@@ -20,29 +20,26 @@ import Profile from "./Profile";
 function JoblyRoutes({ login, signup, update }) {
   const { currUser } = useContext(userContext);
 
-  // TODO: only wrap certain routes in conditionals
-  // TODO: put path before element
-  if (!currUser) {
-    return (
-      <Routes className="Routes">
-        <Route element={<Home />} path="/" />
-        <Route element={<Login login={login} />} path="/login" />
-        <Route element={<SignUp signup={signup} />} path="/signup" />
-        <Route element={<Navigate to="/" />} path="*" />
-      </Routes>
-    );
-  } else {
-    return (
-      <Routes className="Routes">
-        <Route element={<Home />} path="/" />
-        <Route element={<CompanyList />} path="/companies" />
-        <Route element={<JobList />} path="/jobs" />
-        <Route element={<CompanyDetail />} path="/companies/:name" />
-        <Route element={<Profile update={update} />} path="/profile" />
-        <Route element={<Navigate to="/" />} path="*" />
-      </Routes>
-    );
-  };
+  return (
+    <Routes className="Routes">
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Navigate to="/" />} />
+      {!currUser
+        ? <React.Fragment>
+          <Route path="/login" element={<Login login={login} />} />
+          <Route path="/signup" element={<SignUp signup={signup} />} />
+        </React.Fragment>
+        : <React.Fragment>
+          <Route path="/companies" element={<CompanyList />} />
+          <Route path="/jobs" element={<JobList />} />
+          <Route path="/companies/:name" element={<CompanyDetail />} />
+          <Route path="/profile" element={<Profile update={update} />} />
+        </React.Fragment>
+      }
+      <Route path="/login" element={<Login login={login} />} />
+      <Route path="/signup" element={<SignUp signup={signup} />} />
+    </Routes>
+  );
 }
 
 export default JoblyRoutes;
