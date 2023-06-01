@@ -66,7 +66,6 @@ class JoblyApi {
   /** Registers a new user and returns JWT token. */
   static async registerUser(formData = {}) {
     let res = await this.request(`auth/register`, formData, "post");
-    console.log("registered token:", res.token);
     return res.token;
   }
 
@@ -83,6 +82,19 @@ class JoblyApi {
   static async loginUser(formData = {}) {
     let res = await this.request(`auth/token`, formData, "post");
     return res.token;
+  }
+
+  /** Updates a user.
+   *
+   * Takes as input username (string) and an object, which looks like
+   * { firstName, lastName, email }
+   *
+   * Returns a user object, like { username, firstName, lastName, email, isAdmin }
+   */
+  static async updateUser({username, firstName, lastName, email}) {
+    const formData = {firstName, lastName, email}
+    let res = await this.request(`users/${username}`, formData, "patch");
+    return res.user;
   }
 
 }

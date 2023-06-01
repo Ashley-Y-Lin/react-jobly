@@ -2,10 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "./userContext";
 
+/** Home renders the page for / */
 
 function Home() {
-  console.log("home is running");
-
   const { currUser } = useContext(userContext);
 
   if (!currUser) {

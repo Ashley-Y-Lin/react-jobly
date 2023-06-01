@@ -28,7 +28,6 @@ function SignUpForm({ onSubmit }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      console.log("trying handleSubmit");
       await onSubmit(formData);
       setFormData(initialFormInput);
       navigate("/");
@@ -55,6 +54,7 @@ function SignUpForm({ onSubmit }) {
           <input
             className="form-control w-25"
             id="password"
+            type="password"
             onChange={handleChange}
             name="password"
             value={formData.password}

@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
-import JoblyApi from "./api"
-import SearchForm from "./SearchForm"
-import JobCardList from "./JobCardList"
+import React, { useState, useEffect } from "react";
+import JoblyApi from "./api";
+import SearchForm from "./SearchForm";
+import JobCardList from "./JobCardList";
 
 /** JobList renders the page for /jobs
  *
@@ -16,7 +16,7 @@ import JobCardList from "./JobCardList"
  */
 
 function JobList() {
-  const [jobs, setJobs] = useState({data:[], isLoading:true});
+  const [jobs, setJobs] = useState({ data: [], isLoading: true });
 
   /** gets all jobs only AFTER MOUNT */
   useEffect(function getAllJobs() {
@@ -24,23 +24,22 @@ function JobList() {
   }, []);
 
   /** filters based on a search term */
-  async function getJobs(searchTerm={}){
+  async function getJobs(searchTerm = {}) {
     try {
       const jobsResult = await JoblyApi.getJobs(searchTerm);
-      setJobs({data:jobsResult, isLoading:false})
+      setJobs({ data: jobsResult, isLoading: false });
     } catch (err) {
-      setJobs({data:[], isLoading:false})
-      console.log(err.message)
+      setJobs({ data: [], isLoading: false });
+      console.log(err.message);
     }
   }
 
-  if (jobs.isLoading) return (<h1>Loading...</h1>)
-
+  if (jobs.isLoading) return (<h1>Loading...</h1>);
 
   return (
     <div className="JobList">
-      <SearchForm searchFunc={getJobs} topic="job"/>
-      <JobCardList jobs={jobs.data}/>
+      <SearchForm searchFunc={getJobs} topic="job" />
+      <JobCardList jobs={jobs.data} />
     </div>
   );
 }

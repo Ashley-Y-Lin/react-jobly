@@ -14,24 +14,23 @@ import { useParams } from "react-router-dom";
 
 function CompanyDetail() {
   const { name } = useParams();
-  const [company, setCompany] = useState({data:null, isLoading:true});
+  const [company, setCompany] = useState({ data: null, isLoading: true });
 
   /** gets list of jobs pertaining to specific company */
   useEffect(function getCompanyJobsList() {
-      async function getCompanyJobs() {
-        try{
-          const companyResponse = await JoblyApi.getCompany(name);
-          setCompany({data:companyResponse, isLoading:false});
-        } catch (err) {
-          setCompany({data:null, isLoading:false});
-          console.log(err.message);
-        }
+    async function getCompanyJobs() {
+      try {
+        const companyResponse = await JoblyApi.getCompany(name);
+        setCompany({ data: companyResponse, isLoading: false });
+      } catch (err) {
+        setCompany({ data: null, isLoading: false });
+        console.log(err.message);
       }
-      getCompanyJobs();
-
+    }
+    getCompanyJobs();
   }, []);
 
-  if (company.isLoading) return (<h1>Loading...</h1>)
+  if (company.isLoading) return (<h1>Loading...</h1>);
 
   return (
     <div className="CompanyDetail">

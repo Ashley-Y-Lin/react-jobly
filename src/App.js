@@ -11,46 +11,48 @@ import jwt_decode from "jwt-decode";
  * State
  * - token: "" (a user's JWT token)
  * - currUser: username, which is a string
+ * - isLoading: indicates whether currUser is being set
 */
 
 function App() {
-  const [token, setToken] = useState(JoblyApi.token);
+  const [token, setToken] = useState("");
   const [currUser, setCurrUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   /** updates currUser every time the token changes  */
   useEffect(function updateCurrUserInfo() {
-    console.log("useEffect is running");
     async function updateNewCurrUser() {
-      if (token === "") {
+      const localStorageToken = localStorage.getItem('token');
+      if (!localStorageToken) {
+        JoblyApi.token = "";
+        setCurrUser(null);
+        setIsLoading(false);
         return;
       }
-      JoblyApi.token = token;
-      localStorage.setItem("token", JSON.stringify(token));
-      const decodedTokenUsername = jwt_decode(token).username;
-      console.log("decodedTokenUsername", decodedTokenUsername)
+      JoblyApi.token = localStorageToken;
+      const decodedTokenUsername = jwt_decode(localStorageToken).username;
       const newCurrUser = await JoblyApi.getUserDetail(decodedTokenUsername);
       setCurrUser(() => ({ ...newCurrUser }));
+      setIsLoading(false);
     }
     updateNewCurrUser();
   }, [token]);
 
-  function updateTokenFromLocalStorage() {
-    const localStorageToken = localStorage.getItem('token')
-    if (localStorageToken){
-      const parsedToken = JSON.parse(localStorageToken);
-      setToken(parsedToken);
-    }
-  }
-
   async function login(formData = {}) {
     const loginResp = await JoblyApi.loginUser(formData);
     setToken(loginResp);
+    localStorage.setItem("token", loginResp);
   }
 
   async function signup(formData = {}) {
-    console.log("signup formData: ", formData);
     const registerResp = await JoblyApi.registerUser(formData);
     setToken(registerResp);
+    localStorage.setItem("token", registerResp);
+  }
+
+  async function update(formData = {}) {
+    const updateResp = await JoblyApi.updateUser(formData);
+    setCurrUser(updateResp);
   }
 
   function logout() {
@@ -59,15 +61,17 @@ function App() {
     localStorage.setItem("token", "");
   }
 
+  if (isLoading === true) return (<div>Is loading...</div>);
+
   return (
-    <userContext.Provider value={{ token, currUser }}>
+    <userContext.Provider value={{ currUser }}>
       <BrowserRouter>
         <div className="App">
           <Nav logout={logout} />
           <JoblyRoutes
-            updateToken={updateTokenFromLocalStorage}
             login={login}
             signup={signup}
+            update={update}
           />
         </div>
       </BrowserRouter>

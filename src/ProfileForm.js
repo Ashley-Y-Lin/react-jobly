@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import userContext from "./userContext";
 
-function ProfileForm ({onSubmit}) {
+/** ProfileForm renders the edit profile form.
+ *
+ *  Props
+ *  - update: func from parent, called onSubmit
+ *
+ *  Profile => ProfileForm
+ */
+
+function ProfileForm({ onSubmit }) {
+  const { currUser } = useContext(userContext);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username:"",
-    password:""
-  });
+
+  const [formData, setFormData] = useState(currUser);
 
   /** Update form input. */
   function handleChange(evt) {
@@ -21,41 +29,60 @@ function ProfileForm ({onSubmit}) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     await onSubmit(formData);
-    setFormData({
-      username:"",
-      password:""
-    });
+    setFormData(currUser);
     navigate("/");
   }
 
   return (
-      <div className="LoginForm">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username"></label>
-            <input
-                id="username"
-                onChange={handleChange}
-                name="username"
-                value={formData.username}
-                placeholder="username"
-            />
-          </div>
+    <div className="ProfileForm">
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <input
+            readOnly={true}
+            id="username"
+            name="username"
+            value={formData.username}
+            placeholder="username"
+          />
+        </div>
 
-          <div>
-            <label htmlFor="password"></label>
-            <input
-                id="password"
-                onChange={handleChange}
-                name="password"
-                value={formData.password}
-                placeholder="password"
-            />
-          </div>
+        <div>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            id="firstName"
+            onChange={handleChange}
+            name="firstName"
+            value={formData.firstName}
+            placeholder="firstName"
+          />
+        </div>
 
-          <button className="LoginForm-submitBtn">Login</button>
-        </form>
-      </div>
+        <div>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            id="lastName"
+            onChange={handleChange}
+            name="lastName"
+            value={formData.lastName}
+            placeholder="lastName"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            onChange={handleChange}
+            name="email"
+            value={formData.email}
+            placeholder="email"
+          />
+        </div>
+
+        <button className="ProfileForm-submitBtn">Save Changes</button>
+      </form>
+    </div>
   );
 }
 

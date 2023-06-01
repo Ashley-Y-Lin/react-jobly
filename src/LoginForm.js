@@ -7,7 +7,7 @@ function LoginForm({ onSubmit }) {
   const initialFormData = {
     username: "",
     password: ""
-  }
+  };
 
   const [formData, setFormData] = useState(initialFormData);
   const [alertMsgs, setAlertMsgs] = useState([]);
@@ -49,6 +49,7 @@ function LoginForm({ onSubmit }) {
 
         <div className="form-group">
           <input
+            type="password"
             className="form-control w-25"
             id="password"
             onChange={handleChange}

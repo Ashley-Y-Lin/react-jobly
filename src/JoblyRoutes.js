@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import userContext from "./userContext";
 import Home from "./Home";
@@ -12,16 +12,16 @@ import Profile from "./Profile";
 /** Routes for Jobly app
  *
  * Props
- * - updateToken: func that resets JoblyApi.token based on localStorage
  * - login: func from parent, passed down to Login
  * - signup: func from parent, passed down to Signup
+ * - update: func from parent, passed down to Profile
 */
 
-function JoblyRoutes({ updateToken, login, signup }) {
+function JoblyRoutes({ login, signup, update }) {
   const { currUser } = useContext(userContext);
 
-  updateToken()
-
+  // TODO: only wrap certain routes in conditionals
+  // TODO: put path before element
   if (!currUser) {
     return (
       <Routes className="Routes">
@@ -38,7 +38,7 @@ function JoblyRoutes({ updateToken, login, signup }) {
         <Route element={<CompanyList />} path="/companies" />
         <Route element={<JobList />} path="/jobs" />
         <Route element={<CompanyDetail />} path="/companies/:name" />
-        <Route element={<Profile />} path="/profile" />
+        <Route element={<Profile update={update} />} path="/profile" />
         <Route element={<Navigate to="/" />} path="*" />
       </Routes>
     );

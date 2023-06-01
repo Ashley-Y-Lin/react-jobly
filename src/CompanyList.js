@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
-import JoblyApi from "./api"
-import SearchForm from "./SearchForm"
-import CompanyCard from "./CompanyCard"
-import userContext from "./userContext";
+import React, { useState, useEffect } from "react";
+import JoblyApi from "./api";
+import SearchForm from "./SearchForm";
+import CompanyCard from "./CompanyCard";
 
 /** CompanyList renders the page for /companies
  *
@@ -18,8 +17,7 @@ import userContext from "./userContext";
  */
 
 function CompanyList() {
-  const {currUser } = useContext(userContext);
-  const [companies, setCompanies] = useState({data:[], isLoading:true});
+  const [companies, setCompanies] = useState({ data: [], isLoading: true });
 
   /** gets all companies only AFTER MOUNT */
   useEffect(function getAllCompanies() {
@@ -27,23 +25,23 @@ function CompanyList() {
   }, []);
 
   /** filters based on a search term */
-  async function getCompanies(searchTerm={}){
+  async function getCompanies(searchTerm = {}) {
     try {
       const companiesResponse = await JoblyApi.getCompanies(searchTerm);
-      setCompanies({data:companiesResponse, isLoading:false});
+      setCompanies({ data: companiesResponse, isLoading: false });
     } catch (err) {
-      setCompanies({data:[], isLoading:false});
+      setCompanies({ data: [], isLoading: false });
       console.log(err.message);
     }
   }
 
-  if (companies.isLoading) return (<h1>Loading...</h1>)
-  console.log("companyList rendered");
+  if (companies.isLoading) return (<h1>Loading...</h1>);
+
   return (
     <div className="CompanyList">
-      <SearchForm searchFunc={getCompanies} topic="company"/>
+      <SearchForm searchFunc={getCompanies} topic="company" />
       {companies.data.length
-        ? companies.data.map(c => <CompanyCard key={c.handle} companyData={c}/>)
+        ? companies.data.map(c => <CompanyCard key={c.handle} companyData={c} />)
         : <div>Sorry, no results were found.</div>
       }
     </div>
