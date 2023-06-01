@@ -36,10 +36,10 @@ function App() {
 
   function updateTokenFromLocalStorage() {
     const localStorageToken = localStorage.getItem('token')
-    console.log("localStorageToken", localStorageToken)
-    const parsedToken = JSON.parse(localStorageToken);
-    console.log("parsedToken", parsedToken)
-    setToken(parsedToken);
+    if (localStorageToken){
+      const parsedToken = JSON.parse(localStorageToken);
+      setToken(parsedToken);
+    }
   }
 
   async function login(formData = {}) {

@@ -19,7 +19,9 @@ import Profile from "./Profile";
 
 function JoblyRoutes({ updateToken, login, signup }) {
   const { currUser } = useContext(userContext);
-  // updateToken()
+
+  updateToken()
+
   if (!currUser) {
     return (
       <Routes className="Routes">
