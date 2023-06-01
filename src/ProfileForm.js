@@ -39,17 +39,20 @@ function ProfileForm({ onSubmit }) {
         <div>
           <label htmlFor="username">Username</label>
           <input
+            className="form-control w-50"
             readOnly={true}
             id="username"
             name="username"
             value={formData.username}
             placeholder="username"
+            disabled
           />
         </div>
 
         <div>
           <label htmlFor="firstName">First Name</label>
           <input
+            className="form-control w-50"
             id="firstName"
             onChange={handleChange}
             name="firstName"
@@ -61,6 +64,7 @@ function ProfileForm({ onSubmit }) {
         <div>
           <label htmlFor="lastName">Last Name</label>
           <input
+            className="form-control w-50"
             id="lastName"
             onChange={handleChange}
             name="lastName"
@@ -72,6 +76,7 @@ function ProfileForm({ onSubmit }) {
         <div>
           <label htmlFor="email">Email</label>
           <input
+            className="form-control w-50"
             id="email"
             onChange={handleChange}
             name="email"
@@ -80,7 +85,7 @@ function ProfileForm({ onSubmit }) {
           />
         </div>
 
-        <button className="ProfileForm-submitBtn">Save Changes</button>
+        <button className="ProfileForm-submitBtn btn btn-primary m-1">Save Changes</button>
       </form>
     </div>
   );
