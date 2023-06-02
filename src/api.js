@@ -97,6 +97,18 @@ class JoblyApi {
     return res.user;
   }
 
+    /** user applies for a job.
+   *
+   * Takes as input username (str) and id (int) of applied job
+   *
+   *
+   * Returns the jobId
+   */
+    static async userApplyForJob(username, jobId) {
+      let res = await this.request(`users/${username}/jobs/${jobId}`,{},"post");
+      return res.applied;
+    }
+
 }
 
 export default JoblyApi;

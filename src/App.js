@@ -10,7 +10,7 @@ import jwt_decode from "jwt-decode";
  *
  * State
  * - token: "" (a user's JWT token)
- * - currUser: username, which is a string
+ * - currUser: user object
  * - isLoading: indicates whether currUser is being set
 */
 
@@ -18,6 +18,8 @@ function App() {
   const [token, setToken] = useState("");
   const [currUser, setCurrUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log("currUser", currUser);
 
   /** updates currUser every time the token changes  */
   useEffect(function updateCurrUserInfo() {
@@ -61,6 +63,13 @@ function App() {
     localStorage.setItem("token", "");
   }
 
+  async function apply(jobId) {
+    const confirmation = await JoblyApi.userApplyForJob(currUser.username, jobId);
+    const updatedUser = await JoblyApi.getUserDetail(currUser.username);
+    setCurrUser(updatedUser);
+    console.log("confirmed application: ", confirmation);
+  }
+
   if (isLoading === true) return (<div>Is loading...</div>);
 
   return (
@@ -72,6 +81,7 @@ function App() {
             login={login}
             signup={signup}
             update={update}
+            apply={apply}
           />
         </div>
       </BrowserRouter>

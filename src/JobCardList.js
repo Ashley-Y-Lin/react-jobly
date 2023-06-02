@@ -9,11 +9,11 @@ import JobCard from "./JobCard";
  * JobCard || CompanyDetail => JobCardList => JobCard
  */
 
-function JobCardList({jobs=[]}) {
+function JobCardList({jobs=[], apply}) {
   return(
     <div className="JobCardList">
       {jobs.length
-        ? jobs.map(job => <JobCard key={job.id} job={job}/>)
+        ? jobs.map(job => <JobCard key={job.id} job={job} apply={apply}/>)
         : <div>Sorry, no jobs were found.</div>
       }
     </div>

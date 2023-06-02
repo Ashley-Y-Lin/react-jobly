@@ -18,7 +18,7 @@ import NotFound from "./NotFound";
  * - update: func from parent, passed down to Profile
 */
 
-function JoblyRoutes({ login, signup, update }) {
+function JoblyRoutes({ login, signup, update, apply }) {
   const { currUser } = useContext(userContext);
 
   return (
@@ -32,7 +32,7 @@ function JoblyRoutes({ login, signup, update }) {
         </React.Fragment>
         : <React.Fragment>
           <Route path="/companies" element={<CompanyList />} />
-          <Route path="/jobs" element={<JobList />} />
+          <Route path="/jobs" element={<JobList apply={apply}/>} />
           <Route path="/companies/:name" element={<CompanyDetail />} />
           <Route path="/profile" element={<Profile update={update} />} />
         </React.Fragment>

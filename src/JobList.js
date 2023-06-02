@@ -15,7 +15,7 @@ import JobCardList from "./JobCardList";
  * JoblyRoutes => JobList => SearchForm && JobCardList
  */
 
-function JobList() {
+function JobList({apply}) {
   const [jobs, setJobs] = useState({ data: [], isLoading: true });
 
   /** gets all jobs only AFTER MOUNT */
@@ -39,7 +39,7 @@ function JobList() {
   return (
     <div className="JobList">
       <SearchForm searchFunc={getJobs} topic="job" />
-      <JobCardList jobs={jobs.data} />
+      <JobCardList apply={apply} jobs={jobs.data} />
     </div>
   );
 }

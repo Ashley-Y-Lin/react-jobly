@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import userContext from "./userContext";
 import convertAndFormat from "./utils";
 import "./JobCard.css";
 
@@ -10,7 +11,9 @@ import "./JobCard.css";
  * JobCardList => JobCard
  */
 
-function JobCard({ job }) {
+function JobCard({ job, apply }) {
+  const {currUser } = useContext(userContext);
+  const applied = currUser.applications.includes(job.id);
 
   return (
     <div className="JobCard">
@@ -19,6 +22,10 @@ function JobCard({ job }) {
       {job.salary && `salary: ${convertAndFormat(job.salary)}`} <br />
       equity: {job.equity}
       </p>
+      {applied
+        ? <button className="ApplyBtn btn btn-danger text-light" disabled>Applied</button>
+        : <button className="ApplyBtn btn btn-danger text-light" onClick={() => apply(job.id)}>Apply
+        </button>}
     </div>
   );
 }
