@@ -5,6 +5,7 @@ import JoblyApi from "./api";
 import JoblyRoutes from "./JoblyRoutes";
 import Nav from "./Nav";
 import jwt_decode from "jwt-decode";
+import useLocalStorage from "./useLocalStorage";
 
 /** Jobly App
  *
@@ -15,11 +16,10 @@ import jwt_decode from "jwt-decode";
 */
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useLocalStorage("token");
+  // console.log("initial token", token)
   const [currUser, setCurrUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  console.log("currUser", currUser);
 
   /** updates currUser every time the token changes  */
   useEffect(function updateCurrUserInfo() {
@@ -43,13 +43,11 @@ function App() {
   async function login(formData = {}) {
     const loginResp = await JoblyApi.loginUser(formData);
     setToken(loginResp);
-    localStorage.setItem("token", loginResp);
   }
 
   async function signup(formData = {}) {
     const registerResp = await JoblyApi.registerUser(formData);
     setToken(registerResp);
-    localStorage.setItem("token", registerResp);
   }
 
   async function update(formData = {}) {
@@ -60,7 +58,6 @@ function App() {
   function logout() {
     setToken("");
     setCurrUser(null);
-    localStorage.setItem("token", "");
   }
 
   async function apply(jobId) {

@@ -18,12 +18,12 @@
 
 }
 
-h4 {
+.CompanyCard h4 {
     position: relative;
     font-size: large;
     margin: 10px;
   }
-h4:after {
+.CompanyCard h4:after {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -34,15 +34,15 @@ h4:after {
     background: goldenrod;
     height: 1px;
   }
-h4:hover:after {
+.CompanyCard h4:hover:after {
     width: 50%;
   }
 
-h4,
-h4:after,
-h4:before {
+.CompanyCard h4,
+.CompanyCard h4:after,
+.CompanyCard h4:before {
     transition: all .5s;
   }
-h4:hover {
+.CompanyCard h4:hover {
     color: black;
   }

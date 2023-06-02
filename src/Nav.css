@@ -4,6 +4,10 @@ a {
     margin-right: 10px;
 }
 
+nav a.active {
+  color: cyan;
+}
+
 /* stroke */
 nav a {
   position: relative;

@@ -38,7 +38,7 @@ function JobList({apply}) {
 
   return (
     <div className="JobList">
-      <SearchForm searchFunc={getJobs} topic="job" />
+      <SearchForm searchFunc={getJobs} topic="jobs" />
       <JobCardList apply={apply} jobs={jobs.data} />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import userContext from "./userContext";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./Nav.css";
 
 
@@ -15,17 +15,17 @@ function Nav({ logout }) {
 
   return (
     <nav className="navbar bg-dark">
-      <Link to="/">Jobly</Link>
+      <NavLink to="/">Jobly</NavLink>
       {!currUser
         ? <div>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Sign Up</NavLink>
         </div>
         : <div>
-          <Link to="/companies">Companies</Link>
-          <Link to="/jobs">Jobs</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/" onClick={logout}>Logout {currUser.firstName}</Link>
+          <NavLink to="/companies">Companies</NavLink>
+          <NavLink to="/jobs">Jobs</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+          <Link to="/" onClick={logout} className="Logout">Logout {currUser.firstName}</Link>
         </div>
       }
     </nav>

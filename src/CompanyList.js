@@ -39,7 +39,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm searchFunc={getCompanies} topic="company" />
+      <SearchForm searchFunc={getCompanies} topic="companies" />
       {companies.data.length
         ? companies.data.map(c => <CompanyCard key={c.handle} companyData={c} />)
         : <div>Sorry, no results were found.</div>

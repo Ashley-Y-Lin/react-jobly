@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 /** Form for getting a search term.
  *
@@ -12,6 +14,7 @@ import React, { useState } from "react";
  */
 
 function SearchForm({ searchFunc, topic }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     searchTerm: "",
   });
@@ -28,8 +31,14 @@ function SearchForm({ searchFunc, topic }) {
   /** Submit form: call function from parent & clear inputs. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    const queryParam = topic==="company" ? "nameLike" : "title";
+    const queryParam = topic==="companies" ? "nameLike" : "title";
     await searchFunc({[queryParam]: formData.searchTerm});
+    setFormData({ searchTerm: "" });
+  }
+
+  async function handleRefresh(evt) {
+    evt.preventDefault();
+    await searchFunc();
     setFormData({ searchTerm: "" });
   }
 
@@ -46,6 +55,9 @@ function SearchForm({ searchFunc, topic }) {
                 placeholder="Enter a search value!"
             />
           <button className="SearchForm-submitBtn btn btn-primary m-2">Submit</button>
+          <button className="SearchForm-refreshBtn btn btn-success m-2"
+        onClick={handleRefresh}>Reset Search
+          </button>
           </div>
         </form>
       </div>
