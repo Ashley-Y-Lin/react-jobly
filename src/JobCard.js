@@ -12,7 +12,7 @@ import "./JobCard.css";
  */
 
 function JobCard({ job, apply }) {
-  const {currUser } = useContext(userContext);
+  const {currUser} = useContext(userContext);
   const applied = currUser.applications.includes(job.id);
 
   return (
