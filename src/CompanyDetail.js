@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
  * JoblyRoutes => CompanyDetail => JobCardList
 */
 
-function CompanyDetail() {
+function CompanyDetail({apply}) {
   const { name } = useParams();
   const [company, setCompany] = useState({ data: null, isLoading: true });
 
@@ -36,7 +36,7 @@ function CompanyDetail() {
     <div className="CompanyDetail">
       <h1>{company.data.name}</h1>
       <p>{company.data.description}</p>
-      <JobCardList jobs={company.data.jobs} />
+      <JobCardList jobs={company.data.jobs} apply={apply}/>
     </div>
   );
 }

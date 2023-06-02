@@ -33,7 +33,7 @@ function JoblyRoutes({ login, signup, update, apply }) {
         : <React.Fragment>
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/jobs" element={<JobList apply={apply}/>} />
-          <Route path="/companies/:name" element={<CompanyDetail />} />
+          <Route path="/companies/:name" element={<CompanyDetail apply={apply}/>} />
           <Route path="/profile" element={<Profile update={update} />} />
         </React.Fragment>
       }
