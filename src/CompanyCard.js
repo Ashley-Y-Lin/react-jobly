@@ -15,7 +15,7 @@ function CompanyCard({ companyData }) {
   return (
     <div className="CompanyCard">
       <Link to={`/companies/${companyData.handle}`}>
-        <h4 className="text-primary">{companyData.name}</h4>
+        <h4 className="text-primary"><p>{companyData.name}</p></h4>
       </Link>
       <p>{companyData.description}</p>
       {companyData.logoUrl &&
